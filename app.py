@@ -4,19 +4,15 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import random
 import time
-from gsheetsdb import connect
+from streamlit_gsheets import GSheetsConnection
 
-# 1. Connect to the Google Sheet
-conn = connect()
-sheet_url = st.secrets["connections"]["gsheets"]["spreadsheet"]
+# 1. Connect to the Google Sheet using streamlit_gsheets
+conn = st.connection("gsheets", type=GSheetsConnection)
 
 @st.cache_data(ttl=600)
 def load_data():
-    query = f'SELECT * FROM "{sheet_url}"'
-    rows = conn.execute(query)
-    rows_list = list(rows)
-    columns = [field[0] for field in rows.description]
-    df = pd.DataFrame(rows_list, columns=columns)
+    # Read the sheet data directly (Sheet1 by default, or specify a sheet name if needed)
+    df = conn.read()
     return df
 
 def create_bar_chart(data):
