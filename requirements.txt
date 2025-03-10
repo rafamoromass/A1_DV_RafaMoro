@@ -1,5 +1,6 @@
-streamlit
-matplotlib
-seaborn
-pandas
-gsheetsdb
+streamlit==1.24.1
+matplotlib==3.7.1
+seaborn==0.12.2
+pandas==1.5.3
+gsheetsdb==0.2.5
+no-sql-parser==2.0.2
